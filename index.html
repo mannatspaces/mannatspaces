@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MannatSpaces - Property Solutions</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <svg class="logo-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Building (Blue) -->
+                    <rect x="70" y="50" width="50" height="100" fill="#003D7A" rx="3"/>
+                    <rect x="80" y="60" width="8" height="12" fill="#FFA500" rx="1"/>
+                    <rect x="95" y="60" width="8" height="12" fill="#FFA500" rx="1"/>
+                    <rect x="80" y="78" width="8" height="12" fill="#FFA500" rx="1"/>
+                    <rect x="95" y="78" width="8" height="12" fill="#FFA500" rx="1"/>
+                    <rect x="80" y="96" width="8" height="12" fill="#FFA500" rx="1"/>
+                    <rect x="95" y="96" width="8" height="12" fill="#FFA500" rx="1"/>
+                    <polygon points="70,50 120,50 125,40 65,40" fill="#003D7A"/>
+                    
+                    <!-- House (Orange) -->
+                    <polygon points="35,120 50,90 65,120" fill="#FF6B35" stroke="#FF6B35" stroke-width="1"/>
+                    <rect x="30" y="120" width="40" height="40" fill="#FF6B35" rx="2"/>
+                    <rect x="38" y="130" width="8" height="10" fill="#003D7A" rx="1"/>
+                    <rect x="52" y="130" width="8" height="10" fill="#003D7A" rx="1"/>
+                    
+                    <!-- Construction/Plot (Green) -->
+                    <rect x="135" y="110" width="45" height="50" fill="#27ae60" rx="2"/>
+                    <line x1="140" y1="110" x2="140" y2="160" stroke="#FFA500" stroke-width="2"/>
+                    <line x1="150" y1="110" x2="150" y2="160" stroke="#FFA500" stroke-width="2"/>
+                    <line x1="160" y1="110" x2="160" y2="160" stroke="#FFA500" stroke-width="2"/>
+                    <line x1="170" y1="110" x2="170" y2="160" stroke="#FFA500" stroke-width="2"/>
+                    <line x1="135" y1="130" x2="180" y2="130" stroke="#FFA500" stroke-width="2"/>
+                    <line x1="135" y1="145" x2="180" y2="145" stroke="#FFA500" stroke-width="2"/>
+                    
+                    <!-- Golden Arc -->
+                    <path d="M 40 140 Q 100 80 150 140" stroke="#FFA500" stroke-width="3" fill="none" stroke-linecap="round"/>
+                </svg>
+                <div class="logo-text">
+                    <h1>MannatSpaces</h1>
+                    <p class="brand-line">Residential • Commercial • Investment • Construction • Plot</p>
+                    <p class="tagline">Har Mannat Ka Perfect Address</p>
+                </div>
+            </div>
+            <div class="nav-buttons" id="navButtons">
+                <button class="btn-nav" id="publicViewBtn">Properties</button>
+                <button class="btn-nav btn-admin" id="adminLoginBtn">Admin Panel</button>
+            </div>
+            <button class="hamburger" id="hamburgerBtn" style="display: none;">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Public View -->
+    <div id="publicView" class="view-container active">
+        <!-- Header Section -->
+        <header class="hero-section">
+            <div class="hero-content">
+                <h2>✨ Har Mannat Ka Perfect Address</h2>
+                <p>MannatSpaces is a trusted platform for residential and commercial property solutions. We connect your dreams with the right address, offering exclusive properties across Residential, Commercial, and Investment categories.</p>
+            </div>
+        </header>
+
+        <!-- Search Section -->
+        <section class="search-section">
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Search by property name, location...">
+                <select id="typeFilter">
+                    <option value="">All Types</option>
+                    <option value="Residential">Residential</option>
+                    <option value="Commercial">Commercial</option>
+                    <option value="Investment">Investment</option>
+                    <option value="Rental">Rental</option>
+                    <option value="Rental - House">Rental - House</option>
+                    <option value="Flats">Flats</option>
+                    <option value="Construction">Construction</option>
+                    <option value="Plot">Plot</option>
+                </select>
+                <select id="localityFilter">
+                    <option value="">All Localities (Indore)</option>
+                    <option value="Vijay Nagar">Vijay Nagar</option>
+                    <option value="Palasia">Palasia</option>
+                    <option value="MG Road">MG Road</option>
+                    <option value="AB Road">A B Road</option>
+                    <option value="Rau">Rau</option>
+                    <option value="Super Corridor">Super Corridor</option>
+                    <option value="Bhawarkua">Bhawarkua</option>
+                    <option value="Rajendra Nagar">Rajendra Nagar</option>
+                    <option value="RNT Marg">RNT Marg</option>
+                    <option value="Scheme 54">Scheme 54</option>
+                    <option value="Scheme 74">Scheme 74</option>
+                    <option value="Sanwer Road">Sanwer Road</option>
+                    <option value="Nipania">Nipania</option>
+                    <option value="Malharganj">Malharganj</option>
+                    <option value="Khajrana">Khajrana</option>
+                    <option value="Chandan Nagar">Chandan Nagar</option>
+                    <option value="Nehru Nagar">Nehru Nagar</option>
+                    <option value="Indraprastha">Indraprastha</option>
+                    <option value="Talawali Chanda">Talawali Chanda</option>
+                    <option value="Dewas Naka">Dewas Naka</option>
+                    <option value="Gayatri Nagar">Gayatri Nagar</option>
+                    <option value="Navlakha">Navlakha</option>
+                </select>
+                <select id="budgetFilter">
+                    <option value="">Any Budget</option>
+                    <option value="lt5">Below ₹5L</option>
+                    <option value="5to10">₹5L - ₹10L</option>
+                    <option value="10to25">₹10L - ₹25L</option>
+                    <option value="25to50">₹25L - ₹50L</option>
+                    <option value="50plus">Above ₹50L</option>
+                </select>
+                <button class="btn-search" onclick="filterProperties()">Search</button>
+            </div>
+        </section>
+
+        <!-- Properties Grid -->
+        <section class="properties-section">
+            <div id="propertiesGrid" class="properties-grid">
+                <!-- Properties will be loaded here -->
+            </div>
+            <div id="noProperties" class="no-properties">
+                <p>कोई Properties उपलब्ध नहीं हैं। जल्द ही अपडेट किया जाएगा।</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- Admin View -->
+    <div id="adminView" class="view-container">
+        <!-- Login/Auth Section -->
+        <div id="adminLogin" class="admin-login">
+            <div class="login-card">
+                <h2>Admin Panel Login</h2>
+                <input type="password" id="adminPassword" placeholder="Enter Admin Password">
+                <button class="btn-primary" onclick="adminLogin()">Login</button>
+                <button class="btn-secondary" onclick="switchToPublic()">Back</button>
+            </div>
+        </div>
+
+        <!-- Admin Dashboard (hidden until login) -->
+        <div id="adminDashboard" class="admin-dashboard" style="display: none;">
+            <div class="admin-header">
+                <h2>Admin Dashboard - Property Management</h2>
+                <button class="btn-logout" onclick="adminLogout()">Logout</button>
+            </div>
+
+            <!-- Add Property Form -->
+            <div class="admin-section">
+                <h3>Add New Property</h3>
+                <div class="form-container">
+                    <input type="text" id="propertyName" placeholder="Property Name" required>
+                    <select id="propertyLocality" required>
+                        <option value="">Select Locality (Indore)</option>
+                        <option value="Vijay Nagar">Vijay Nagar</option>
+                        <option value="Palasia">Palasia</option>
+                        <option value="MG Road">MG Road</option>
+                        <option value="AB Road">A B Road</option>
+                        <option value="Rau">Rau</option>
+                        <option value="Super Corridor">Super Corridor</option>
+                        <option value="Bhawarkua">Bhawarkua</option>
+                        <option value="Rajendra Nagar">Rajendra Nagar</option>
+                        <option value="RNT Marg">RNT Marg</option>
+                        <option value="Scheme 54">Scheme 54</option>
+                        <option value="Scheme 74">Scheme 74</option>
+                        <option value="Sanwer Road">Sanwer Road</option>
+                        <option value="Nipania">Nipania</option>
+                        <option value="Malharganj">Malharganj</option>
+                        <option value="Khajrana">Khajrana</option>
+                        <option value="Chandan Nagar">Chandan Nagar</option>
+                        <option value="Nehru Nagar">Nehru Nagar</option>
+                        <option value="Indraprastha">Indraprastha</option>
+                        <option value="Talawali Chanda">Talawali Chanda</option>
+                        <option value="Dewas Naka">Dewas Naka</option>
+                        <option value="Gayatri Nagar">Gayatri Nagar</option>
+                        <option value="Navlakha">Navlakha</option>
+                    </select>
+                    <input type="text" id="propertyLocation" placeholder="Exact Address (optional)">
+                    <select id="propertyType" required>
+                        <option value="">Select Type</option>
+                        <option value="Residential">Residential</option>
+                        <option value="Commercial">Commercial</option>
+                        <option value="Investment">Investment</option>
+                        <option value="Rental">Rental</option>
+                        <option value="Rental - House">Rental - House</option>
+                        <option value="Flats">Flats</option>
+                        <option value="Construction">Construction</option>
+                        <option value="Plot">Plot</option>
+                    </select>
+                    <input type="number" id="propertyPrice" placeholder="Price (₹)" required>
+                    <input type="number" id="propertyArea" placeholder="Area (sq ft)" required>
+                    <textarea id="propertyDescription" placeholder="Property Description" rows="4"></textarea>
+                    <input type="tel" id="propertyPhone" placeholder="WhatsApp Number (Country Code + Number)" required>
+                    <div class="form-divider">📸 Photos & Videos</div>
+                    <input type="file" id="propertyImages" accept="image/*" multiple placeholder="Upload Property Images (Max 15)">
+                    <div id="imagePreview" class="image-preview"></div>
+                    <input type="url" id="propertyVideoUrl" placeholder="YouTube/Video URL (Optional)">
+                    <input type="url" id="propertyVideoUrl2" placeholder="2nd Video URL (Optional)">
+                    <button class="btn-primary" onclick="addProperty()">Add Property</button>
+                </div>
+            </div>
+
+            <!-- Properties List for Admin -->
+            <div class="admin-section">
+                <h3>Manage Properties</h3>
+                <div id="adminPropertiesList" class="admin-properties-list">
+                    <!-- Properties will be loaded here with edit/delete buttons -->
+                </div>
+                <div id="noAdminProperties" class="no-properties">
+                    <p>कोई Properties उपलब्ध नहीं हैं।</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Property Details Modal -->
+    <div id="propertyModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="modalBody">
+                <!-- Property details will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Property Modal -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeEditModal()">&times;</span>
+            <h2>Edit Property</h2>
+            <div class="form-container">
+                <input type="hidden" id="editPropertyId">
+                <input type="text" id="editPropertyName" placeholder="Property Name" required>
+                <select id="editPropertyLocality" required>
+                    <option value="">Select Locality (Indore)</option>
+                    <option value="Vijay Nagar">Vijay Nagar</option>
+                    <option value="Palasia">Palasia</option>
+                    <option value="MG Road">MG Road</option>
+                    <option value="AB Road">A B Road</option>
+                    <option value="Rau">Rau</option>
+                    <option value="Super Corridor">Super Corridor</option>
+                    <option value="Bhawarkua">Bhawarkua</option>
+                    <option value="Rajendra Nagar">Rajendra Nagar</option>
+                    <option value="RNT Marg">RNT Marg</option>
+                    <option value="Scheme 54">Scheme 54</option>
+                    <option value="Scheme 74">Scheme 74</option>
+                    <option value="Sanwer Road">Sanwer Road</option>
+                    <option value="Nipania">Nipania</option>
+                    <option value="Malharganj">Malharganj</option>
+                    <option value="Khajrana">Khajrana</option>
+                    <option value="Chandan Nagar">Chandan Nagar</option>
+                    <option value="Nehru Nagar">Nehru Nagar</option>
+                    <option value="Indraprastha">Indraprastha</option>
+                    <option value="Talawali Chanda">Talawali Chanda</option>
+                    <option value="Dewas Naka">Dewas Naka</option>
+                    <option value="Gayatri Nagar">Gayatri Nagar</option>
+                    <option value="Navlakha">Navlakha</option>
+                </select>
+                <input type="text" id="editPropertyLocation" placeholder="Exact Address (optional)">
+                <select id="editPropertyType" required>
+                    <option value="">Select Type</option>
+                    <option value="Residential">Residential</option>
+                    <option value="Commercial">Commercial</option>
+                    <option value="Investment">Investment</option>
+                    <option value="Rental">Rental</option>
+                    <option value="Rental - House">Rental - House</option>
+                    <option value="Flats">Flats</option>
+                    <option value="Construction">Construction</option>
+                    <option value="Plot">Plot</option>
+                </select>
+                <input type="number" id="editPropertyPrice" placeholder="Price (₹)" required>
+                <input type="number" id="editPropertyArea" placeholder="Area (sq ft)" required>
+                <textarea id="editPropertyDescription" placeholder="Property Description" rows="4"></textarea>
+                <input type="tel" id="editPropertyPhone" placeholder="WhatsApp Number" required>
+                <div class="form-divider">📸 Photos & Videos</div>
+                <input type="file" id="editPropertyImages" accept="image/*" multiple placeholder="Upload Property Images (Max 15)">
+                <div id="editImagePreview" class="image-preview"></div>
+                <input type="url" id="editPropertyVideoUrl" placeholder="YouTube/Video URL (Optional)">
+                <input type="url" id="editPropertyVideoUrl2" placeholder="2nd Video URL (Optional)">
+                <button class="btn-primary" onclick="saveEditProperty()">Save Changes</button>
+                <button class="btn-secondary" onclick="closeEditModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
