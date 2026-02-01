@@ -126,7 +126,7 @@
                 <!-- Properties will be loaded here -->
             </div>
             <div id="noProperties" class="no-properties">
-                <p>कोई Properties उपलब्ध नहीं हैं। जल्द ही अपडेट किया जाएगा।</p>
+                <p>No properties available. Will be updated soon.</p>
             </div>
         </section>
     </div>
@@ -180,7 +180,7 @@
                         <option value="Gayatri Nagar">Gayatri Nagar</option>
                         <option value="Navlakha">Navlakha</option>
                     </select>
-                    <input type="text" id="propertyLocation" placeholder="Exact Address (optional)">
+                    <input type="text" id="propertyLocation" placeholder="Exact Location Address (अनिवार्य)" required>
                     <select id="propertyType" required>
                         <option value="">Select Type</option>
                         <option value="Residential">Residential</option>
@@ -192,15 +192,17 @@
                         <option value="Construction">Construction</option>
                         <option value="Plot">Plot</option>
                     </select>
-                    <input type="number" id="propertyPrice" placeholder="Price (₹)" required>
                     <input type="number" id="propertyArea" placeholder="Area (sq ft)" required>
+                    <input type="number" id="propertyPerSquareRate" placeholder="Price per sq ft (₹)" required>
+                    <input type="number" id="propertyTotalPrice" placeholder="Total Price (auto-calculated)" readonly>
+                    <div id="totalPriceDisplay" style="padding: 0.75rem; background: #f0f0f0; border-radius: 4px; font-weight: bold; color: #27ae60; display: none;"></div>
                     <textarea id="propertyDescription" placeholder="Property Description" rows="4"></textarea>
                     <input type="tel" id="propertyPhone" placeholder="WhatsApp Number (Country Code + Number)" required>
                     <div class="form-divider">📸 Photos & Videos</div>
-                    <input type="file" id="propertyImages" accept="image/*" multiple placeholder="Upload Property Images (Max 15)">
+                    <input type="file" id="propertyImages" accept="image/*" multiple placeholder="Upload Property Images (Max 15, Optional)">
                     <div id="imagePreview" class="image-preview"></div>
-                    <input type="url" id="propertyVideoUrl" placeholder="YouTube/Video URL (Optional)">
-                    <input type="url" id="propertyVideoUrl2" placeholder="2nd Video URL (Optional)">
+                    <input type="file" id="propertyVideo" accept="video/*" placeholder="Upload Property Video (Optional)">
+                    <input type="url" id="propertyMapUrl" placeholder="Google Maps URL (Optional)">
                     <button class="btn-primary" onclick="addProperty()">Add Property</button>
                 </div>
             </div>
@@ -212,27 +214,11 @@
                     <!-- Properties will be loaded here with edit/delete buttons -->
                 </div>
                 <div id="noAdminProperties" class="no-properties">
-                    <p>कोई Properties उपलब्ध नहीं हैं।</p>
+                    <p>No properties available.</p>
                 </div>
             </div>
 
-            <!-- Manage Admins -->
-            <div class="admin-section">
-                <h3>👨‍💼 Manage Admins</h3>
-                <div class="form-container" style="grid-template-columns: 1fr;">
-                    <input type="text" id="newAdminName" placeholder="Admin Name/Business Name" required>
-                    <input type="tel" id="newAdminPhone" placeholder="WhatsApp Number (+91 format or 10 digits)" required>
-                    <input type="email" id="newAdminEmail" placeholder="Email (Optional)">
-                    <textarea id="newAdminNotes" placeholder="Business Details/Notes" rows="3" style="grid-column: 1;"></textarea>
-                    <button class="btn-primary" onclick="addAdmin()" style="grid-column: 1;">Add Admin</button>
-                </div>
-                <div id="adminsList" class="admin-properties-list" style="margin-top: 1.5rem;">
-                    <!-- Admins will be loaded here -->
-                </div>
-                <div id="noAdmins" class="no-properties" style="display: none;">
-                    <p>कोई Admin उपलब्ध नहीं है।</p>
-                </div>
-            </div>
+
         </div>
     </div>
 
@@ -279,7 +265,7 @@
                     <option value="Gayatri Nagar">Gayatri Nagar</option>
                     <option value="Navlakha">Navlakha</option>
                 </select>
-                <input type="text" id="editPropertyLocation" placeholder="Exact Address (optional)">
+                <input type="text" id="editPropertyLocation" placeholder="Exact Location Address" required>
                 <select id="editPropertyType" required>
                     <option value="">Select Type</option>
                     <option value="Residential">Residential</option>
@@ -291,15 +277,16 @@
                     <option value="Construction">Construction</option>
                     <option value="Plot">Plot</option>
                 </select>
-                <input type="number" id="editPropertyPrice" placeholder="Price (₹)" required>
                 <input type="number" id="editPropertyArea" placeholder="Area (sq ft)" required>
+                <input type="number" id="editPropertyPerSquareRate" placeholder="Price per sq ft (₹)" required>
+                <input type="number" id="editPropertyTotalPrice" placeholder="Total Price (auto-calculated)" readonly>
                 <textarea id="editPropertyDescription" placeholder="Property Description" rows="4"></textarea>
                 <input type="tel" id="editPropertyPhone" placeholder="WhatsApp Number" required>
                 <div class="form-divider">📸 Photos & Videos</div>
-                <input type="file" id="editPropertyImages" accept="image/*" multiple placeholder="Upload Property Images (Max 15)">
+                <input type="file" id="editPropertyImages" accept="image/*" multiple placeholder="Upload Property Images (Max 15, Optional)">
                 <div id="editImagePreview" class="image-preview"></div>
-                <input type="url" id="editPropertyVideoUrl" placeholder="YouTube/Video URL (Optional)">
-                <input type="url" id="editPropertyVideoUrl2" placeholder="2nd Video URL (Optional)">
+                <input type="file" id="editPropertyVideo" accept="video/*" placeholder="Upload Property Video (Optional)">
+                <input type="url" id="editPropertyMapUrl" placeholder="Google Maps URL (Optional)">
                 <button class="btn-primary" onclick="saveEditProperty()">Save Changes</button>
                 <button class="btn-secondary" onclick="closeEditModal()">Cancel</button>
             </div>
