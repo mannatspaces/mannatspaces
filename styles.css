@@ -1305,3 +1305,64 @@ body {
         font-size: 0.85rem;
     }
 }
+
+/* Extra Mobile Optimizations */
+@media (max-width: 768px) {
+    /* Touch-friendly button sizes */
+    button, a[role="button"] {
+        min-height: 44px;
+        min-width: 44px;
+    }
+
+    /* Better text input for mobile */
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="number"],
+    select,
+    textarea {
+        font-size: 16px; /* Prevents zoom on iOS */
+        min-height: 44px;
+    }
+
+    /* Better modal for mobile */
+    .modal {
+        padding: 1rem;
+    }
+
+    .modal-content {
+        max-height: calc(100vh - 2rem);
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* Better gallery for mobile */
+    .photo-gallery {
+        grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+        gap: 0.6rem;
+    }
+
+    .gallery-thumbnail {
+        height: 70px;
+    }
+
+    /* Better image preview for mobile */
+    .image-preview {
+        grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+        gap: 0.6rem;
+    }
+
+    .image-preview img {
+        height: 70px;
+    }
+
+    /* Admin property items stacked */
+    .admin-property-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .admin-property-actions {
+        width: 100%;
+    }
+}

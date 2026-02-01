@@ -44,38 +44,6 @@ function isValidPhoneNumber(phone) {
     return cleaned.length >= 10 && cleaned.length <= 12;
 }
 
-// Generate professional WhatsApp message
-function generateWhatsAppMessage(property) {
-    const priceFormatted = new Intl.NumberFormat('en-IN', {
-        style: 'currency',
-        currency: 'INR',
-        minimumFractionDigits: 0
-    }).format(property.price);
-
-    const message = `नमस्ते! 👋
-
-मुझे आपकी यह संपत्ति पसंद आई:
-
-📍 *${property.name}*
-
-🏘️ *विवरण:*
-• 📌 स्थान: ${property.location}
-• 🏗️ प्रकार: ${property.type}
-• 📐 क्षेत्र: ${property.area} sq ft
-• 💰 मूल्य: ${priceFormatted}
-
-📝 विवरण: ${property.description.substring(0, 100)}...
-
-क्या आप कृपया इसके बारे में अधिक जानकारी प्रदान कर सकते हैं?
-
-धन्यवाद! 🙏
-
--- MannatSpaces द्वारा
-Har Mannat Ka Perfect Address ✨`;
-
-    return message;
-}
-
 // Mobile Menu Handler
 document.addEventListener('DOMContentLoaded', function() {
     const hamburgerBtn = document.getElementById('hamburgerBtn');
@@ -100,8 +68,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Close menu on window resize if screen becomes larger
     window.addEventListener('resize', function() {
         if (window.innerWidth > 768) {
-            if(hamburgerBtn) hamburgerBtn.classList.remove('active');
-            if(navButtons) navButtons.classList.remove('active');
+            hamburgerBtn.classList.remove('active');
+            navButtons.classList.remove('active');
         }
     });
 });
@@ -250,6 +218,7 @@ function adminLogout() {
     }
 }
 
+// ===== ADMIN MANAGEMENT FUNCTIONS =====
 // Load admins when admin dashboard loads
 function loadAdminsForDisplay() {
     loadAdminsFromStorage();
@@ -273,17 +242,17 @@ function addAdmin() {
         return;
     }
 
-    const cleanPhone = phone.replace(/\D/g, '');
     const formattedPhone = formatPhoneNumber(phone);
 
     const admin = {
         id: Date.now(),
         name,
         phone: formattedPhone,
-        rawPhone: cleanPhone,
+        rawPhone: phone.replace(/\D/g, ''),
         email: email || '',
         notes,
-        createdAt: new Date().toLocaleString('en-IN')
+        createdAt: new Date().toLocaleString('en-IN'),
+        propertiesCount: 0
     };
 
     admins.push(admin);
@@ -395,8 +364,8 @@ function addProperty() {
         return;
     }
 
-    const cleanPhone = phone.replace(/\D/g, '');
     const formattedPhone = formatPhoneNumber(phone);
+    const cleanPhone = phone.replace(/\D/g, '');
 
     // Read multiple images as base64
     let imagesLoaded = 0;
@@ -418,9 +387,9 @@ function addProperty() {
                     price: parseInt(price),
                     area: parseInt(area),
                     description,
-                    phone: cleanPhone,
+                    phone: cleanPhone, // Store clean phone for WhatsApp
                     images: images,
-                    image: images[0],
+                    image: images[0], // First image as thumbnail
                     videoUrl: videoUrl || null,
                     videoUrl2: videoUrl2 || null
                 };
@@ -561,6 +530,83 @@ function saveEditProperty() {
     }
 }
 
+    // Validation
+    if (!name || !locality || !type || !price || !area || !description || !phone) {
+        alert('❌ कृपया सभी आवश्यक fields भरें।');
+        return;
+    }
+
+    if (imageFiles.length > 15) {
+        alert('❌ अधिकतम 15 images upload कर सकते हैं।');
+        return;
+    }
+
+    const propertyIndex = properties.findIndex(p => p.id === id);
+    if (propertyIndex !== -1) {
+        if (imageFiles.length > 0) {
+            // If new images are selected, read them
+            let imagesLoaded = 0;
+            const images = [];
+
+            Array.from(imageFiles).forEach((file, index) => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    images[index] = e.target.result;
+                    imagesLoaded++;
+
+                    if (imagesLoaded === imageFiles.length) {
+                        properties[propertyIndex] = {
+                            id,
+                            name,
+                            locality,
+                            location,
+                            type,
+                            price: parseInt(price),
+                            area: parseInt(area),
+                            description,
+                            phone,
+                            images: images,
+                            image: images[0],
+                            videoUrl: videoUrl || null,
+                            videoUrl2: videoUrl2 || null
+                        };
+                        savePropertiesToStorage();
+                        updateLocalityDropdown();
+                        loadAdminProperties();
+                        displayPublicProperties();
+                        closeEditModal();
+                        alert('✅ Property सफलतापूर्वक अपडेट की गई! (फोटो: ' + images.length + ')');
+                    }
+                };
+                reader.readAsDataURL(file);
+            });
+        } else {
+            // Keep existing images if no new images selected
+            properties[propertyIndex] = {
+                id,
+                name,
+                locality,
+                location,
+                type,
+                price: parseInt(price),
+                area: parseInt(area),
+                description,
+                phone,
+                images: properties[propertyIndex].images || [properties[propertyIndex].image],
+                image: properties[propertyIndex].image,
+                videoUrl: videoUrl || null,
+                videoUrl2: videoUrl2 || null
+            };
+            savePropertiesToStorage();
+            updateLocalityDropdown();
+            loadAdminProperties();
+            displayPublicProperties();
+            closeEditModal();
+            alert('✅ Property सफलतापूर्वक अपडेट की गई!');
+        }
+    }
+}
+
 // Delete Property (Admin)
 function deleteProperty(id) {
     if (confirm('क्या आप इस Property को हटाना चाहते हैं?')) {
@@ -624,6 +670,10 @@ function createPropertyCard(property) {
         minimumFractionDigits: 0
     }).format(property.price);
 
+    // Format phone properly
+    const cleanPhone = property.phone.replace(/\D/g, '');
+    const whatsappMessage = generateWhatsAppMessage(property);
+
     card.innerHTML = `
         <div class="property-image">
             ${imageUrl ? `<img src="${imageUrl}" alt="${property.name}">` : '🏢'}
@@ -641,14 +691,37 @@ function createPropertyCard(property) {
             <div class="property-price">${priceFormatted}</div>
             <div class="property-actions">
                 <button class="btn-view" onclick="event.stopPropagation(); showPropertyDetails(this.closest('.property-card').__property)">View Details</button>
-                <a href="https://wa.me/${property.phone}?text=${encodeURIComponent(generateWhatsAppMessage(property))}" target="_blank" class="btn-whatsapp-chat" onclick="event.stopPropagation()">💬 Chat</a>
-                <a href="tel:${property.phone}" class="btn-whatsapp-call" onclick="event.stopPropagation()">📞 Call</a>
+                <a href="https://wa.me/${cleanPhone}?text=${encodeURIComponent(whatsappMessage)}" target="_blank" class="btn-whatsapp-chat" onclick="event.stopPropagation()">💬 Chat</a>
+                <a href="tel:${cleanPhone}" class="btn-whatsapp-call" onclick="event.stopPropagation()">📞 Call</a>
             </div>
         </div>
     `;
 
     card.__property = property;
     return card;
+}
+
+// Generate professional WhatsApp message
+function generateWhatsAppMessage(property) {
+    const priceFormatted = new Intl.NumberFormat('en-IN', {
+        style: 'currency',
+        currency: 'INR',
+        minimumFractionDigits: 0
+    }).format(property.price);
+
+    return `🏠 मुझे यह Property MannatSpaces पर मिली है:
+
+📍 ${property.name}
+📌 ${property.locality}${property.location ? ', ' + property.location : ''}
+💰 मूल्य: ${priceFormatted}
+📐 क्षेत्र: ${property.area} वर्ग फीट
+🏷️ प्रकार: ${property.type}
+
+📝 विवरण: ${property.description}
+
+क्या आप इसके बारे में अधिक जानकारी दे सकते हैं?
+
+✨ MannatSpaces - Har Mannat Ka Perfect Address`;
 }
 
 // Show Property Details
@@ -697,6 +770,7 @@ function showPropertyDetails(property) {
     }
 
     const imageCount = property.images ? property.images.length : 1;
+    const cleanPhone = property.phone.replace(/\D/g, '');
     const whatsappMessage = generateWhatsAppMessage(property);
 
     modalBody.innerHTML = `
@@ -717,10 +791,10 @@ function showPropertyDetails(property) {
         <div class="whatsapp-contact-section">
             <h4>📱 Contact Agent</h4>
             <div class="whatsapp-buttons">
-                <a href="https://wa.me/${property.phone}?text=${encodeURIComponent(whatsappMessage)}" target="_blank" class="btn-whatsapp-modal">
+                <a href="https://wa.me/${cleanPhone}?text=${encodeURIComponent(whatsappMessage)}" target="_blank" class="btn-whatsapp-modal">
                     💬 Chat on WhatsApp
                 </a>
-                <a href="tel:${property.phone}" class="btn-call-modal">
+                <a href="tel:${cleanPhone}" class="btn-call-modal">
                     📞 Call Now
                 </a>
             </div>
@@ -740,6 +814,40 @@ function extractYoutubeId(url) {
     const regex = /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\n?#]+)/;
     const match = url.match(regex);
     return match ? match[1] : null;
+}
+
+// Generate professional WhatsApp message
+function generateWhatsAppMessage(property) {
+    const priceFormatted = new Intl.NumberFormat('en-IN', {
+        style: 'currency',
+        currency: 'INR',
+        minimumFractionDigits: 0
+    }).format(property.price);
+
+    const message = `
+नमस्ते! 👋
+
+मुझे आपकी यह संपत्ति पसंद आई:
+
+📍 *${property.name}*
+
+🏘️ *विवरण:*
+• 📌 स्थान: ${property.location}
+• 🏗️ प्रकार: ${property.type}
+• 📐 क्षेत्र: ${property.area} sq ft
+• 💰 मूल्य: ${priceFormatted}
+
+📝 विवरण: ${property.description.substring(0, 100)}...
+
+क्या आप कृपया इसके बारे में अधिक जानकारी प्रदान कर सकते हैं?
+
+धन्यवाद! 🙏
+
+-- MannatSpaces द्वारा
+Har Mannat Ka Perfect Address ✨
+    `.trim();
+
+    return message;
 }
 
 // Close Modal
@@ -871,37 +979,31 @@ function addSampleProperties() {
             {
                 id: 1,
                 name: "Luxury Apartment - Sector 15",
-                locality: "Vijay Nagar",
                 location: "Gurgaon, Haryana",
                 type: "Residential",
                 price: 7500000,
                 area: 1800,
                 description: "Beautiful 3 BHK luxury apartment with modern amenities, gym, swimming pool, and 24/7 security. Close to shopping malls and schools.",
-                phone: "919876543210",
                 image: "default"
             },
             {
                 id: 2,
                 name: "Commercial Office Space",
-                locality: "MG Road",
                 location: "Delhi, NCR",
                 type: "Commercial",
                 price: 25000000,
                 area: 5000,
                 description: "Prime commercial office space in business district. Ideal for IT companies, consulting firms, and startups. High-speed internet connectivity.",
-                phone: "919876543210",
                 image: "default"
             },
             {
                 id: 3,
                 name: "Investment Villa Complex",
-                locality: "Palasia",
                 location: "Noida Extension",
                 type: "Investment",
                 price: 4500000,
                 area: 2500,
                 description: "Plot for investment in upcoming villa complex with excellent ROI potential. 5 minutes from metro station. Ready for development.",
-                phone: "919876543210",
                 image: "default"
             }
         ];

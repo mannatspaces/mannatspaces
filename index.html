@@ -215,6 +215,24 @@
                     <p>कोई Properties उपलब्ध नहीं हैं।</p>
                 </div>
             </div>
+
+            <!-- Manage Admins -->
+            <div class="admin-section">
+                <h3>👨‍💼 Manage Admins</h3>
+                <div class="form-container" style="grid-template-columns: 1fr;">
+                    <input type="text" id="newAdminName" placeholder="Admin Name/Business Name" required>
+                    <input type="tel" id="newAdminPhone" placeholder="WhatsApp Number (+91 format or 10 digits)" required>
+                    <input type="email" id="newAdminEmail" placeholder="Email (Optional)">
+                    <textarea id="newAdminNotes" placeholder="Business Details/Notes" rows="3" style="grid-column: 1;"></textarea>
+                    <button class="btn-primary" onclick="addAdmin()" style="grid-column: 1;">Add Admin</button>
+                </div>
+                <div id="adminsList" class="admin-properties-list" style="margin-top: 1.5rem;">
+                    <!-- Admins will be loaded here -->
+                </div>
+                <div id="noAdmins" class="no-properties" style="display: none;">
+                    <p>कोई Admin उपलब्ध नहीं है।</p>
+                </div>
+            </div>
         </div>
     </div>
 
