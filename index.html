@@ -155,43 +155,9 @@
                 <h3>Add New Property</h3>
                 <div class="form-container">
                     <input type="text" id="propertyName" placeholder="Property Name" required>
-                    <select id="propertyLocality" required>
-                        <option value="">Select Locality (Indore)</option>
-                        <option value="Vijay Nagar">Vijay Nagar</option>
-                        <option value="Palasia">Palasia</option>
-                        <option value="MG Road">MG Road</option>
-                        <option value="AB Road">A B Road</option>
-                        <option value="Rau">Rau</option>
-                        <option value="Super Corridor">Super Corridor</option>
-                        <option value="Bhawarkua">Bhawarkua</option>
-                        <option value="Rajendra Nagar">Rajendra Nagar</option>
-                        <option value="RNT Marg">RNT Marg</option>
-                        <option value="Scheme 54">Scheme 54</option>
-                        <option value="Scheme 74">Scheme 74</option>
-                        <option value="Sanwer Road">Sanwer Road</option>
-                        <option value="Nipania">Nipania</option>
-                        <option value="Malharganj">Malharganj</option>
-                        <option value="Khajrana">Khajrana</option>
-                        <option value="Chandan Nagar">Chandan Nagar</option>
-                        <option value="Nehru Nagar">Nehru Nagar</option>
-                        <option value="Indraprastha">Indraprastha</option>
-                        <option value="Talawali Chanda">Talawali Chanda</option>
-                        <option value="Dewas Naka">Dewas Naka</option>
-                        <option value="Gayatri Nagar">Gayatri Nagar</option>
-                        <option value="Navlakha">Navlakha</option>
-                    </select>
-                    <input type="text" id="propertyLocation" placeholder="Exact Location Address (अनिवार्य)" required>
-                    <select id="propertyType" required>
-                        <option value="">Select Type</option>
-                        <option value="Residential">Residential</option>
-                        <option value="Commercial">Commercial</option>
-                        <option value="Investment">Investment</option>
-                        <option value="Rental">Rental</option>
-                        <option value="Rental - House">Rental - House</option>
-                        <option value="Flats">Flats</option>
-                        <option value="Construction">Construction</option>
-                        <option value="Plot">Plot</option>
-                    </select>
+                    <input type="text" id="propertyLocality" placeholder="Locality (e.g., Vijay Nagar, Palasia)" required>
+                    <input type="text" id="propertyLocation" placeholder="Exact Location Address (Required)" required>
+                    <input type="text" id="propertyType" placeholder="Property Type (e.g., Residential, Commercial, Plot)" required>
                     <input type="number" id="propertyArea" placeholder="Area (sq ft)" required>
                     <input type="number" id="propertyPerSquareRate" placeholder="Price per sq ft (₹)" required>
                     <input type="number" id="propertyTotalPrice" placeholder="Total Price (auto-calculated)" readonly>
@@ -202,7 +168,6 @@
                     <input type="file" id="propertyImages" accept="image/*" multiple placeholder="Upload Property Images (Max 15, Optional)">
                     <div id="imagePreview" class="image-preview"></div>
                     <input type="file" id="propertyVideo" accept="video/*" placeholder="Upload Property Video (Optional)">
-                    <input type="url" id="propertyMapUrl" placeholder="Google Maps URL (Optional)">
                     <button class="btn-primary" onclick="addProperty()">Add Property</button>
                 </div>
             </div>
@@ -240,43 +205,9 @@
             <div class="form-container">
                 <input type="hidden" id="editPropertyId">
                 <input type="text" id="editPropertyName" placeholder="Property Name" required>
-                <select id="editPropertyLocality" required>
-                    <option value="">Select Locality (Indore)</option>
-                    <option value="Vijay Nagar">Vijay Nagar</option>
-                    <option value="Palasia">Palasia</option>
-                    <option value="MG Road">MG Road</option>
-                    <option value="AB Road">A B Road</option>
-                    <option value="Rau">Rau</option>
-                    <option value="Super Corridor">Super Corridor</option>
-                    <option value="Bhawarkua">Bhawarkua</option>
-                    <option value="Rajendra Nagar">Rajendra Nagar</option>
-                    <option value="RNT Marg">RNT Marg</option>
-                    <option value="Scheme 54">Scheme 54</option>
-                    <option value="Scheme 74">Scheme 74</option>
-                    <option value="Sanwer Road">Sanwer Road</option>
-                    <option value="Nipania">Nipania</option>
-                    <option value="Malharganj">Malharganj</option>
-                    <option value="Khajrana">Khajrana</option>
-                    <option value="Chandan Nagar">Chandan Nagar</option>
-                    <option value="Nehru Nagar">Nehru Nagar</option>
-                    <option value="Indraprastha">Indraprastha</option>
-                    <option value="Talawali Chanda">Talawali Chanda</option>
-                    <option value="Dewas Naka">Dewas Naka</option>
-                    <option value="Gayatri Nagar">Gayatri Nagar</option>
-                    <option value="Navlakha">Navlakha</option>
-                </select>
+                <input type="text" id="editPropertyLocality" placeholder="Locality (e.g., Vijay Nagar, Palasia)" required>
                 <input type="text" id="editPropertyLocation" placeholder="Exact Location Address" required>
-                <select id="editPropertyType" required>
-                    <option value="">Select Type</option>
-                    <option value="Residential">Residential</option>
-                    <option value="Commercial">Commercial</option>
-                    <option value="Investment">Investment</option>
-                    <option value="Rental">Rental</option>
-                    <option value="Rental - House">Rental - House</option>
-                    <option value="Flats">Flats</option>
-                    <option value="Construction">Construction</option>
-                    <option value="Plot">Plot</option>
-                </select>
+                <input type="text" id="editPropertyType" placeholder="Property Type (e.g., Residential, Commercial, Plot)" required>
                 <input type="number" id="editPropertyArea" placeholder="Area (sq ft)" required>
                 <input type="number" id="editPropertyPerSquareRate" placeholder="Price per sq ft (₹)" required>
                 <input type="number" id="editPropertyTotalPrice" placeholder="Total Price (auto-calculated)" readonly>
@@ -286,7 +217,6 @@
                 <input type="file" id="editPropertyImages" accept="image/*" multiple placeholder="Upload Property Images (Max 15, Optional)">
                 <div id="editImagePreview" class="image-preview"></div>
                 <input type="file" id="editPropertyVideo" accept="video/*" placeholder="Upload Property Video (Optional)">
-                <input type="url" id="editPropertyMapUrl" placeholder="Google Maps URL (Optional)">
                 <button class="btn-primary" onclick="saveEditProperty()">Save Changes</button>
                 <button class="btn-secondary" onclick="closeEditModal()">Cancel</button>
             </div>

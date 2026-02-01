@@ -280,7 +280,6 @@ function addProperty() {
     const description = document.getElementById('propertyDescription').value.trim();
     const phone = document.getElementById('propertyPhone').value.trim();
     const imageFiles = document.getElementById('propertyImages').files;
-    const mapUrl = document.getElementById('propertyMapUrl').value.trim();
     const videoFiles = document.getElementById('propertyVideo').files;
 
     // Validation
@@ -352,7 +351,6 @@ function addProperty() {
             phone: cleanPhone,
             images: images.length > 0 ? images : ['default'],
             image: images.length > 0 ? images[0] : 'default',
-            mapUrl: mapUrl || null,
             video: videoData || null
         };
 
@@ -404,7 +402,6 @@ function saveEditProperty() {
     const description = document.getElementById('editPropertyDescription').value.trim();
     const phone = document.getElementById('editPropertyPhone').value.trim();
     const imageFiles = document.getElementById('editPropertyImages').files;
-    const mapUrl = document.getElementById('editPropertyMapUrl').value.trim();
     const videoFiles = document.getElementById('editPropertyVideo').files;
 
     if (!name || !locality || !location || !type || !area || !perSquareRate || !description || !phone) {
@@ -469,7 +466,6 @@ function saveEditProperty() {
                 phone: cleanPhone,
                 images: imgs.length > 0 ? imgs : ['default'],
                 image: imgs.length > 0 ? imgs[0] : 'default',
-                mapUrl: mapUrl || null,
                 video: vid || null
             };
 
@@ -602,10 +598,11 @@ function showPropertyDetails(property) {
     }
 
     let mapHTML = ``;
-    if (property.mapUrl) {
+    if (property.location) {
+        const mapQuery = encodeURIComponent(property.location + ', Indore, India');
         mapHTML = `<div class="property-map" style="margin: 1.5rem 0;">
             <h4>📍 Location Map</h4>
-            <a href="${property.mapUrl}" target="_blank" class="btn-primary" style="display: inline-block;">🗺️ View on Google Maps</a>
+            <iframe width="100%" height="300" style="border: none; border-radius: 8px;" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBu-916DwE6df7be8j-NLrQBBBVDgO4Ojw&q=${mapQuery}" allowfullscreen="" loading="lazy"></iframe>
         </div>`;
     }
 
