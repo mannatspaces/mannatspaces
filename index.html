@@ -157,7 +157,17 @@
                     <input type="text" id="propertyName" placeholder="Property Name" required>
                     <input type="text" id="propertyLocality" placeholder="Locality (e.g., Vijay Nagar, Palasia)" required>
                     <input type="text" id="propertyLocation" placeholder="Exact Location Address (Required)" required>
-                    <input type="text" id="propertyType" placeholder="Property Type (e.g., Residential, Commercial, Plot)" required>
+                    <select id="propertyType" required>
+                        <option value="">Select Type</option>
+                        <option value="Residential">Residential</option>
+                        <option value="Commercial">Commercial</option>
+                        <option value="Investment">Investment</option>
+                        <option value="Rental">Rental</option>
+                        <option value="Rental - House">Rental - House</option>
+                        <option value="Flats">Flats</option>
+                        <option value="Construction">Construction</option>
+                        <option value="Plot">Plot</option>
+                    </select>
                     <input type="number" id="propertyArea" placeholder="Area (sq ft)" required>
                     <input type="number" id="propertyPerSquareRate" placeholder="Price per sq ft (₹)" required>
                     <input type="number" id="propertyTotalPrice" placeholder="Total Price (auto-calculated)" readonly>
@@ -207,7 +217,17 @@
                 <input type="text" id="editPropertyName" placeholder="Property Name" required>
                 <input type="text" id="editPropertyLocality" placeholder="Locality (e.g., Vijay Nagar, Palasia)" required>
                 <input type="text" id="editPropertyLocation" placeholder="Exact Location Address" required>
-                <input type="text" id="editPropertyType" placeholder="Property Type (e.g., Residential, Commercial, Plot)" required>
+                <select id="editPropertyType" required>
+                    <option value="">Select Type</option>
+                    <option value="Residential">Residential</option>
+                    <option value="Commercial">Commercial</option>
+                    <option value="Investment">Investment</option>
+                    <option value="Rental">Rental</option>
+                    <option value="Rental - House">Rental - House</option>
+                    <option value="Flats">Flats</option>
+                    <option value="Construction">Construction</option>
+                    <option value="Plot">Plot</option>
+                </select>
                 <input type="number" id="editPropertyArea" placeholder="Area (sq ft)" required>
                 <input type="number" id="editPropertyPerSquareRate" placeholder="Price per sq ft (₹)" required>
                 <input type="number" id="editPropertyTotalPrice" placeholder="Total Price (auto-calculated)" readonly>
